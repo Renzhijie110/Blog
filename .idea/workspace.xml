@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="04d11d49-afab-48a6-8110-6a662d8c0078" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GH5IPUsiECoYLbpOOmrehmb1yn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Daily",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "spring.configuration.checksum": "bea79186fd7af2da67e59b4b15df5a26"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Daily\src\main\resources\static\images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DailyApplication">
+    <configuration name="com.zhijie.daily.util.MD5Utils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.zhijie.daily.util.MD5Utils" />
+      <module name="daily" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lh.daily.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DailyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="daily" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zhijie.daily.DailyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.com.zhijie.daily.util.MD5Utils" />
+      <item itemvalue="Spring Boot.DailyApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.zhijie.daily.util.MD5Utils" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="04d11d49-afab-48a6-8110-6a662d8c0078" name="Changes" comment="" />
+      <created>1666032588138</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666032588138</updated>
+      <workItem from="1666032590004" duration="2529000" />
+      <workItem from="1666108411901" duration="83000" />
+      <workItem from="1666119943342" duration="11279000" />
+      <workItem from="1666134276532" duration="299000" />
+      <workItem from="1666134697934" duration="84000" />
+      <workItem from="1666135151754" duration="964000" />
+      <workItem from="1666141524121" duration="2537000" />
+      <workItem from="1666144437911" duration="303000" />
+      <workItem from="1666145074841" duration="646000" />
+      <workItem from="1666146785554" duration="12000" />
+      <workItem from="1666197922638" duration="2759000" />
+      <workItem from="1666204313514" duration="2284000" />
+      <workItem from="1666207670791" duration="3853000" />
+      <workItem from="1666215743930" duration="35000" />
+      <workItem from="1666217080346" duration="525000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Blog Management</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" />
+</head>
+<body>
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--手机端自适应 stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">管理后台</h2>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon "></i>&nbsp;&nbsp;游记</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>&nbsp;分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>&nbsp;&nbsp;&nbsp;标签</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/images/footer.jpeg" alt="" class="ui avatar image">
+                        yuMoyu
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--二级导航-->
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/dailys/input}" class="active teal item">Publish</a>
+            <a href="#" th:href="@{/admin/dailys}" class="item">List</a>
+        </div>
+    </div>
+</div>
+<!--  中间内容-->
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+        <form id="daily-form" action="#" th:object="${daily}" th:action="@{/admin/dailys}" method="post" class="ui form">
+            <input type="hidden" name="published">
+            <input type="hidden" name="id" th:value="*{id}">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <div class="ui selection compact teal basic dropdown label">
+                        <input type="hidden" value="Original" name="flag" th:value="*{flag}">
+                        <i class="dropdown icon"></i>
+                        <div class="text">Original</div>
+                        <div class="menu">
+                            <div class="item" data-value="Original">Original</div>
+                            <div class="item" data-value="Reproduce">Reproduce</div>
+                            <div class="item" data-value="Translation">Transaction</div>
+                        </div>
+                    </div>
+                    <input type="text" name="title" placeholder="Title" th:value="*{title}">
+                </div>
+            </div>
+            <div class="required field">
+                <div id="md-content" style="z-index: 1 !important;">
+                    <textarea name="content" style="display:none;" th:text="*{content}"></textarea>
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact teal basic label">Type</label>
+                        <div class="ui fluid selection dropdown">
+                            <input type="hidden" name="type.id" th:value="*{type}!=null ? *{type.id}">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Type</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" date-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
+                                <!--/*-->
+                                <!--html原型显示，thymeleaf模板识别为注释-->
+                                <div class="item" date-value="2">开发者手册</div>
+                                <!--*/-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact teal basic label">Tag</label>
+                        <div class="ui tag selection fluid multiple search dropdown">
+                            <input type="hidden" name="tagIds" th:value="*{tagIds}">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Tag</div>
+                            <div class="menu">
+                                <div th:each="tag : ${tags}" class="item" date-value="1" th:data-value="${tag.id}" th:text="${tag.name}">java</div>
+                                <!--/*-->
+                                <!--html原型显示，thymeleaf模板识别为注释-->
+                                <div class="item" date-value="2">c++</div>
+                                <!--*/-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">Cover Image</label>
+                    <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="Image URL:">
+                </div>
+            </div>
+            <div class="required field">
+                <textarea name="description" th:text="*{description}" placeholder="游记描述..." maxlength="200"></textarea>
+            </div>
+            <div class="inline fields">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="recommend" name="recommend" th:checked="*{recommend}" checked class="hidden">
+                        <label for="recommend">Recommend</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="shareStatement" name="shareStatement" th:checked="*{shareStatement}" class="hidden">
+                        <label for="shareStatement">Reproduce</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="appreciation" name="appreciation" th:checked="*{appreciation}" class="hidden">
+                        <label for="appreciation">Tip</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="commentabled" name="commentabled" th:checked="*{commentabled}" class="hidden">
+                        <label for="commentabled">Comment</label>
+                    </div>
+                </div>
+            </div>
+            <!--存放错误信息-->
+            <div class="ui error message"></div>
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">Back</button>
+                <button type="button" id="save-btn" class="ui secondary button">Save</button>
+                <button type="button" id="publish-btn" class="ui teal button">Publish</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--  底部-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/footer.jpeg" class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新游记</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email</a>
+                    <a href="#" class="item">QQ</a>
+                    <a href="#" class="item">微信</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">游记介绍</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">交流旅游中遇到的人与风景，与下一个自己相遇。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright @ 2020 - 2021 yuMoyu</p>
+    </div>
+</footer>
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+<script>
+    //md组件初始化
+    var contentEditor;
+    $(function() {
+        contentEditor = editormd("md-content", {
+            width   : "100%",
+            height  : 640,
+            syncScrolling : "single",
+            //path    : "../../static/lib/editormd/lib/"
+            path : "/lib/editormd/lib/"
+        });
+    });
+    $('.menu.toggle').click(function () {
+        // 如果有此样式，就去除掉
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    //初始化下拉组件
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+    //保存草稿
+    $('#save-btn').click(function () {
+       $('[name="published"]').val(false);
+       $('#daily-form').submit();
+    });
+    //发布文章
+    $('#publish-btn').click(function () {
+        $('[name="published"]').val(true);
+        $('#daily-form').submit();
+    });
+    //可以自定义标签
+    $('.ui.tag.dropdown')
+      .dropdown({
+          allowAdditions: true
+      });
+
+    //表单验证规则
+    $('.ui.form').form({
+        fields : {
+            title : {
+                identifier : 'title',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Title: Please enter the blog title'
+                }]
+            },
+            content : {
+                identifier : 'content',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Title: Please enter the blog content'
+                }]
+            },
+            typeId : {
+                identifier : 'typeId',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Title: Please enter the blog type'
+                }]
+            },
+            firstPicture : {
+                identifier : 'firstPicture',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Title: Please upload blog first picture'
+                }]
+            },
+            description : {
+                identifier : 'description',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Title: Please enter the blog description'
+                }]
+            }
+        }
+    });
+</script>
+
+</body>
+
+</html>

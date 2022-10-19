@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+      <div class="ui container">
+          <div class="ui middle aligned center aligned grid">
+              <div class="column">
+                  <h2 class="ui teal image header">
+                      <div class="content">
+                          Login Your Account
+                      </div>
+                  </h2>
+                  <form class="ui large form" method="post" action="#" th:action="@{/admin/login}">
+                      <div class="ui segment">
+                          <div class="field">
+                              <div class="ui left icon input">
+                                  <i class="user icon"></i>
+                                  <input type="text" name="username" placeholder="username">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="ui left icon input">
+                                  <i class="lock icon"></i>
+                                  <input type="password" name="password" placeholder="password">
+                              </div>
+                          </div>
+                          <button class="ui fluid large teal submit button">Login</button>
+                      </div>
+
+                      <div class="ui error mini message"></div>
+                      <!--非空显示-->
+                      <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">Invalid username or password</div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+  <!--/*/</th:block>/*/-->
+<script>
+    //表单验证规则
+    $('.ui.form').form({
+        fields : {
+            username : {
+                identifier : 'username',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Please enter the username'
+                }]
+            },
+            password : {
+                identifier : 'password',
+                rules:[{
+                    type: 'empty',
+                    prompt: 'Please enter the password'
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>

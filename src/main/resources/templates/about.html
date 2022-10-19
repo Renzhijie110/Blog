@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>About Me</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--手机端自适应 stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item"></h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon "></i>&nbsp;&nbsp;</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>&nbsp;</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>&nbsp;&nbsp;&nbsp;</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>&nbsp;&nbsp;</a>
+            <a href="#" class=" m-item item m-mobile-hide"><i class="mini info icon"></i></a>
+            <div class="right m-item item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--  中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
+                <div class="ui segment">
+                    <img src="https://picsum.photos/800/600/?blur" alt="" class="ui rounded image">
+                </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui top attached segment">
+                    <div class="ui header">About Me</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text">I am an independent software development engineer currently. I have program experience in develop web applications. And I want to join a collaborative team and work together with talent people.</p>
+                    <p class="m-text"></p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange left pointing basic label m-margin-tb-tiny">Thinking</div>
+                    <div class="ui orange left pointing basic label m-margin-tb-tiny">Programming</div>
+                    <div class="ui orange left pointing basic label m-margin-tb-tiny">Writing</div>
+                    <div class="ui orange left pointing basic label m-margin-tb-tiny">Sharing</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal left pointing basic label m-margin-tb-tiny">Java</div>
+                    <div class="ui teal left pointing basic label m-margin-tb-tiny">JavaScript</div>
+                    <div class="ui teal left pointing basic label m-margin-tb-tiny">CSS</div>
+                    <div class="ui teal left pointing basic label m-margin-tb-tiny">Python</div>
+                    <div class="ui teal left pointing basic label m-margin-tb-tiny">SQL</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="#" class="ui github circular icon button" data-content="https://github.com/Renzhijie110"><i class="github icon"></i></a>
+                    <a href="#" class="ui call circular icon button" data-content="5516896552"><i class="call icon"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  底部-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/images/footer.jpeg" class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新游记</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email</a>
+                    <a href="#" class="item">QQ</a>
+                    <a href="#" class="item">微信</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">游记介绍</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">交流旅游中遇到的人与风景，与下一个自己相遇。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright @ 2020 - 2021 yuMoyu</p>
+    </div>
+</footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+</body>
+
+<script>
+    $('.menu.toggle').click(function () {
+        // 如果有此样式，就去除掉
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.call').popup();
+    $('.github').popup();
+
+</script>
+</html>

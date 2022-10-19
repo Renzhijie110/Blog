@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Blog Management</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--手机端自适应 stackable-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">管理后台</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon "></i>&nbsp;&nbsp;游记</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>&nbsp;分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>&nbsp;&nbsp;&nbsp;标签</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/images/footer.jpeg" alt="" class="ui avatar image">
+                        yuMoyu
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--二级导航-->
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/dailys/input}" class="item">Publish</a>
+            <a href="#" th:href="@{/admin/dailys}" class="active teal item">List</a>
+        </div>
+    </div>
+</div>
+<!--  中间内容-->
+<div class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui secondary segment form">
+            <!--点击下一页，调用js把其值赋给page;通过表单传递到后台获取数据；获取到数据后，再传递到前台进行渲染-->
+            <input type="hidden" name="page">
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" name="title" placeholder="Title">
+                </div>
+                <div class="field">
+                    <div class="ui labeled action input">
+                        <div class="ui type selection dropdown">
+                            <input type="hidden" name="typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Type</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" date-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
+                                <!--/*-->
+                                <!--html原型显示，thymeleaf模板识别为注释-->
+                                <div class="item" date-value="2">开发者手册</div>
+                                <!--*/-->
+                            </div>
+                        </div>
+                        <button id="clear-btn" class="ui mini basic solar-green compact button">&nbsp;Clear</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="recommend" name="recommend">
+                        <label for="recommend">Recommend</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>Search</button>
+                </div>
+            </div>
+        </div>
+        <div id="table-container">
+            <table th:fragment="dailyList"  class="ui compact teal table">
+                <thead>
+                <!--page.content是daily列表-->
+                <tr>
+                    <th></th>
+                    <th width="30%">Title</th>
+                    <th>Type</th>
+                    <th>Recommend</th>
+                    <th>Status</th>
+                    <th>Update Time</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="daily,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${#strings.abbreviate(daily.title,22)}"> 去哪里旅游？</td>
+                    <td th:text="${daily.type.name}">认知升级</td>
+                    <td th:text="${daily.recommend} ? 'Yes':'No' ">Yes</td>
+                    <td th:text="${daily.published} ? 'Published':'Draft' ">草稿</td>
+                    <td th:text="${#dates.format(daily.updateTime,'yyyy-MM-dd HH:mm')}">2017-10-02 09:45</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/dailys/{id}/input(id=${daily.id})}" class="ui mini teal basic button">Edit</a>
+                        <a href="#" th:href="@{/admin/dailys/{id}/delete(id=${daily.id})}" class="ui mini red basic button">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                            <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item" th:unless="${page.first}">Prev</a>
+                            <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">Next</a>
+                        </div>
+                        <a href="#" th:href="@{/admin/dailys/input}" class="ui mini right floated teal basic button">Add</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">Prompt：</div>
+                <p th:text="${message}">Congratulations！</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  底部-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/footer.jpeg" class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新游记</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                    <a href="#" class="item">游圆明园</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我们</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email</a>
+                    <a href="#" class="item">QQ</a>
+                    <a href="#" class="item">微信</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">游记介绍</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">交流旅游中遇到的人与风景，与下一个自己相遇。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright @ 2020 - 2021 yuMoyu</p>
+    </div>
+</footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+</body>
+
+<script>
+    $('.menu.toggle').click(function () {
+        // 如果有此样式，就去除掉
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    //初始化下拉组件
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+    //点击上一页、下一页将值赋值给page
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        //调用loaddata因为隐含条件查询
+        loaddata();
+    }
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loaddata();
+    });
+    //向后台发送请求
+    function loaddata() {
+        $("#table-container").load(/*[[@{/admin/dailys/search}]]*/"/admin/dailys/search", {
+           title : $("[name='title']").val(),
+            typeId : $("[name='typeId']").val(),
+           recommend : $("[name='recommend']").prop('checked'),
+            page : $("[name='page']").val()
+        });
+
+    }
+
+    //清除选中
+    $('#clear-btn')
+        .on('click', function() {
+            $('.ui.type.dropdown')
+                .dropdown('clear')
+            ;
+        })
+    ;
+</script>
+</html>
